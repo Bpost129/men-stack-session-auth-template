@@ -19,8 +19,9 @@ async function signUp(req, res) {
   req.session.user = {
     username: user.username,
   }
-  await req.session.save()
-  res.redirect('/')
+  req.session.save(() => {
+    res.redirect('/')
+  })
 }
 
 function newSignIn(req, res) {
@@ -42,13 +43,15 @@ async function signIn(req, res) {
   req.session.user = {
     username: userInDatabase.username,
   }
-  await req.session.save()
-  res.redirect('/')
+  req.session.save(() => {
+    res.redirect('/')
+  })
 }
 
-async function signOut(req, res) {
-  await req.session.destroy()
-  res.redirect('/')
+function signOut(req, res) {
+  req.session.destroy(() => {
+    res.redirect('/')
+  })
 }
 
 export {
