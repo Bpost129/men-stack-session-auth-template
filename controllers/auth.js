@@ -18,10 +18,9 @@ async function signUp(req, res) {
   const user = await User.create(req.body)
   req.session.user = {
     username: user.username,
-  }  
-  req.session.save(() => {
-    res.redirect('/')
-  })
+  }
+  await req.session.save()
+  res.redirect('/')
 }
 
 function newSignIn(req, res) {
@@ -43,15 +42,13 @@ async function signIn(req, res) {
   req.session.user = {
     username: userInDatabase.username,
   }
-  req.session.save(() => {
-    res.redirect('/')
-  })
+  await req.session.save()
+  res.redirect('/')
 }
 
-function signOut(req, res) {
-  req.session.destroy(() => {
-    res.redirect('/')
-  })
+async function signOut(req, res) {
+  await req.session.destroy()
+  res.redirect('/')
 }
 
 export {
