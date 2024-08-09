@@ -30,7 +30,7 @@ function newSignIn(req, res) {
 }
 
 async function signIn(req, res) {
-  const userInDatabase = await User.findOne({ username: req.body.username })
+  const userInDatabase = await User.findOne({ username: req.body.username }).select('+password')
   if (!userInDatabase) {
     return res.send('Login failed. Please try again.')
   }
