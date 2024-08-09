@@ -1,17 +1,27 @@
 import { User } from "../models/user.js"
 
 async function index(req, res) {
-  const users = await User.find({})
-  res.render('users/index', {
-    users
-  })
+  try {
+    const users = await User.find({})
+    res.render('users/index', {
+      users
+    })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
 }
 
 async function show(req, res) {
-  const selectedUser = await User.findById(req.params.userId)
-  res.render('users/show', {
-    selectedUser
-  })
+  try {
+    const selectedUser = await User.findById(req.params.userId)
+    res.render('users/show', {
+      selectedUser
+    })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
 }
 
 export {
