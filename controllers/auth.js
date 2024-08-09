@@ -18,6 +18,7 @@ async function signUp(req, res) {
   const user = await User.create(req.body)
   req.session.user = {
     username: user.username,
+    _id: user._id
   }
   req.session.save(() => {
     res.redirect('/')
@@ -42,6 +43,7 @@ async function signIn(req, res) {
   }
   req.session.user = {
     username: userInDatabase.username,
+    _id: userInDatabase._id
   }
   req.session.save(() => {
     res.redirect('/')
