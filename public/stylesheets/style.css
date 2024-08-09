@@ -30,7 +30,7 @@ nav {
   justify-content: space-around;
 }
 
-form {
+form.auth {
   display: flex;
   flex-direction: column;
   align-items: center;
